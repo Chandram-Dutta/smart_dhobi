@@ -193,45 +193,6 @@ class HomeScreen extends ConsumerWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: ref.watch(destinationProvider) == 1
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).scaffoldBackgroundColor,
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.primary,
-                          width: 2,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Theme.of(context).colorScheme.background,
-                            offset: const Offset(-10, -10),
-                            blurRadius: 50,
-                            spreadRadius: 2,
-                          ),
-                          const BoxShadow(
-                            color: Colors.black,
-                            offset: Offset(10, 10),
-                            blurRadius: 30,
-                            spreadRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: IconButton(
-                          onPressed: () {
-                            ref.read(destinationProvider.state).state = 1;
-                          },
-                          tooltip: "Alerts",
-                          icon: const Icon(Icons.notifications),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
                         color: ref.watch(destinationProvider) == 2
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).scaffoldBackgroundColor,

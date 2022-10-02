@@ -49,7 +49,7 @@ class ScheduleDatabase {
     }
   }
 
-  Future syncClothList(List<String> clothList,String documentId) async {
+  Future syncClothList(List<String> clothList, String documentId) async {
     try {
       await databases.updateDocument(
         documentId: documentId,
@@ -69,8 +69,14 @@ class ScheduleDatabase {
     int maxClothes,
     String userId,
   ) async {
+    int i = (noOfTotalClothes / maxClothes).floor();
+    int j = noOfTotalClothes % maxClothes;
+
+    print(i);
+    print(j);
+
     for (int i = 0; i < noOfWashes; i++) {
-      if (noOfTotalClothes > maxClothes) {
+      if (i != 0) {
         try {
           await databases.createDocument(
             permissions: [
@@ -92,7 +98,7 @@ class ScheduleDatabase {
             databaseId: laundryDatabaseId,
             data: {
               "laundry_date": dateTime.toIso8601String(),
-              "max": maxClothes,
+              "max": i,
               "cart_list": []
             },
           );
@@ -102,7 +108,7 @@ class ScheduleDatabase {
           );
         }
         dateTime = dateTime.add(
-          const Duration(days: 4),
+          const Duration(days: 7),
         );
       } else {
         try {
