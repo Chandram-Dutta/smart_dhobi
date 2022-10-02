@@ -11,11 +11,11 @@ class CartDatabase {
     databases = Databases(client);
   }
 
-  Future<List?> getCartList() async {
+  Future<List?> getCartList(String collectionID) async {
     try {
       final response = await databases.listDocuments(
-        collectionId: cartCollectionId,
-        databaseId: laundryDatabaseId,
+        collectionId: collectionID,
+        databaseId: cartDatabaseId,
       );
       return response.documents;
     } catch (e) {
