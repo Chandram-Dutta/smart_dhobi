@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_dhobi/auth/auth_service.dart';
-import 'package:smart_dhobi/presentation/widgets/loader_dialog.dart';
 
 import '../../providers.dart';
 import '../destinations/account.dart';
@@ -75,7 +74,7 @@ class HomeScreen extends ConsumerWidget {
                       case 2:
                         return const Account();
                       case 3:
-                        return const LaundryCart();
+                        return LaundryCart();
                       default:
                         return const Text("Error");
                     }
@@ -271,61 +270,6 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
           ),
-          Builder(builder: (context) {
-            if (ref.watch(destinationProvider) == 3) {
-              return Positioned(
-                bottom: 100,
-                right: 10,
-                child: FloatingActionButton.extended(
-                  label: const Text("Add Clothes"),
-                  icon: const Icon(Icons.add_shopping_cart_rounded),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text("Add Clothes"),
-                        content: TextField(
-                          decoration: const InputDecoration(
-                            labelText: "Cloth Name",
-                          ),
-                          controller: clothesController,
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text(
-                              "Cancel",
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () async {
-                              showLoaderDialog(context);
-                              await ref.watch(cartDatabaseProvider).createCart(
-                                    clothesController.text,
-                                    await authService.account
-                                        .then((value) => value!.$id),
-                                  );
-                              ref.refresh(cartDatabaseProvider);
-                              clothesController.clear();
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            },
-                            child: const Text(
-                              "Add",
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              );
-            } else {
-              return const SizedBox();
-            }
-          }),
         ],
       )),
     );

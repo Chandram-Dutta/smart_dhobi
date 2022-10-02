@@ -315,180 +315,180 @@ class ScheduleDestination extends ConsumerWidget {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      FutureBuilder(
-                                          future: cartDatabase.getCartList(),
-                                          builder: (context,
-                                              AsyncSnapshot snapshot1) {
-                                            if (snapshot1.hasData) {
-                                              return Padding(
-                                                padding: const EdgeInsets.only(
-                                                  left: 18.0,
-                                                  right: 18.0,
-                                                  top: 10,
-                                                  bottom: 160,
-                                                ),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      "Add Clothes",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline6,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    ListView.builder(
-                                                        itemCount: snapshot1
-                                                            .data!.length,
-                                                        shrinkWrap: true,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          if (snapshot1
-                                                              .data.isEmpty) {
-                                                            return SizedBox(
-                                                              height: 200,
-                                                              width:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              child:
-                                                                  const Center(
-                                                                child: Icon(Icons
-                                                                    .cancel),
-                                                              ),
-                                                            );
-                                                          } else {
-                                                            return GestureDetector(
-                                                              onTap: () {
-                                                                if (ref.watch(cartListProvider).length <
-                                                                        max ||
-                                                                    ref.watch(cartListProvider).contains(snapshot1
-                                                                        .data
-                                                                        .elementAt(
-                                                                            index)
-                                                                        .data["cart_name"])) {
-                                                                  if (ref
-                                                                      .watch(
-                                                                          cartListProvider)
-                                                                      .contains(snapshot1
-                                                                          .data
-                                                                          .elementAt(
-                                                                              index)
-                                                                          .data["cart_name"])) {
-                                                                    ref
-                                                                        .read(cartListProvider
-                                                                            .state)
-                                                                        .state
-                                                                        .remove(snapshot1
-                                                                            .data
-                                                                            .elementAt(index)
-                                                                            .data["cart_name"]);
-                                                                  } else {
-                                                                    ref
-                                                                        .read(cartListProvider
-                                                                            .state)
-                                                                        .state
-                                                                        .add(snapshot1
-                                                                            .data
-                                                                            .elementAt(index)
-                                                                            .data["cart_name"]);
-                                                                  }
-                                                                } else {
-                                                                  showCupertinoDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (context) {
-                                                                        return CupertinoAlertDialog(
-                                                                          title:
-                                                                              const Text("Max Limit"),
-                                                                          content:
-                                                                              const Text("You have reached the max limit of clothes per wash"),
-                                                                          actions: [
-                                                                            CupertinoDialogAction(
-                                                                              child: const Text("Ok"),
-                                                                              onPressed: () {
-                                                                                Navigator.pop(context);
-                                                                              },
-                                                                            )
-                                                                          ],
-                                                                        );
-                                                                      });
-                                                                }
-                                                                setState(() {});
-                                                              },
-                                                              child: SizedBox(
-                                                                width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                                child: Card(
-                                                                    color: ref
-                                                                            .watch(
-                                                                                cartListProvider)
-                                                                            .contains(snapshot1.data.elementAt(index).data[
-                                                                                "cart_name"])
-                                                                        ? Theme.of(context)
-                                                                            .colorScheme
-                                                                            .primary
-                                                                        : Theme.of(context)
-                                                                            .colorScheme
-                                                                            .background,
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .all(
-                                                                          18.0),
-                                                                      child:
-                                                                          Text(
-                                                                        "${snapshot1.data.elementAt(index).data["cart_name"]}",
-                                                                      ),
-                                                                    )),
-                                                              ),
-                                                            );
-                                                          }
-                                                        }),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 70,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      child: ElevatedButton(
-                                                        onPressed: () async {
-                                                          showLoaderDialog(
-                                                              context);
-                                                          await scheduleDatabase
-                                                              .syncClothList(
-                                                            ref.read(
-                                                                cartListProvider),
-                                                            snapshot.data
-                                                                .elementAt(
-                                                                    index)
-                                                                .data['\$id'],
-                                                          );
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: const Text(
-                                                            "Sync Clothes List"),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              );
-                                            } else {
-                                              return const CupertinoActivityIndicator();
-                                            }
-                                          })
+                                    children: const <Widget>[
+                                      // FutureBuilder(
+                                      //     future: cartDatabase.getCartList(),
+                                      //     builder: (context,
+                                      //         AsyncSnapshot snapshot1) {
+                                      //       if (snapshot1.hasData) {
+                                      //         return Padding(
+                                      //           padding: const EdgeInsets.only(
+                                      //             left: 18.0,
+                                      //             right: 18.0,
+                                      //             top: 10,
+                                      //             bottom: 160,
+                                      //           ),
+                                      //           child: Column(
+                                      //             crossAxisAlignment:
+                                      //                 CrossAxisAlignment.start,
+                                      //             children: [
+                                      //               Text(
+                                      //                 "Add Clothes",
+                                      //                 style: Theme.of(context)
+                                      //                     .textTheme
+                                      //                     .headline6,
+                                      //               ),
+                                      //               const SizedBox(
+                                      //                 height: 10,
+                                      //               ),
+                                      //               ListView.builder(
+                                      //                   itemCount: snapshot1
+                                      //                       .data!.length,
+                                      //                   shrinkWrap: true,
+                                      //                   itemBuilder:
+                                      //                       (context, index) {
+                                      //                     if (snapshot1
+                                      //                         .data.isEmpty) {
+                                      //                       return SizedBox(
+                                      //                         height: 200,
+                                      //                         width:
+                                      //                             MediaQuery.of(
+                                      //                                     context)
+                                      //                                 .size
+                                      //                                 .width,
+                                      //                         child:
+                                      //                             const Center(
+                                      //                           child: Icon(Icons
+                                      //                               .cancel),
+                                      //                         ),
+                                      //                       );
+                                      //                     } else {
+                                      //                       return GestureDetector(
+                                      //                         onTap: () {
+                                      //                           if (ref.watch(cartListProvider).length <
+                                      //                                   max ||
+                                      //                               ref.watch(cartListProvider).contains(snapshot1
+                                      //                                   .data
+                                      //                                   .elementAt(
+                                      //                                       index)
+                                      //                                   .data["cart_name"])) {
+                                      //                             if (ref
+                                      //                                 .watch(
+                                      //                                     cartListProvider)
+                                      //                                 .contains(snapshot1
+                                      //                                     .data
+                                      //                                     .elementAt(
+                                      //                                         index)
+                                      //                                     .data["cart_name"])) {
+                                      //                               ref
+                                      //                                   .read(cartListProvider
+                                      //                                       .state)
+                                      //                                   .state
+                                      //                                   .remove(snapshot1
+                                      //                                       .data
+                                      //                                       .elementAt(index)
+                                      //                                       .data["cart_name"]);
+                                      //                             } else {
+                                      //                               ref
+                                      //                                   .read(cartListProvider
+                                      //                                       .state)
+                                      //                                   .state
+                                      //                                   .add(snapshot1
+                                      //                                       .data
+                                      //                                       .elementAt(index)
+                                      //                                       .data["cart_name"]);
+                                      //                             }
+                                      //                           } else {
+                                      //                             showCupertinoDialog(
+                                      //                                 context:
+                                      //                                     context,
+                                      //                                 builder:
+                                      //                                     (context) {
+                                      //                                   return CupertinoAlertDialog(
+                                      //                                     title:
+                                      //                                         const Text("Max Limit"),
+                                      //                                     content:
+                                      //                                         const Text("You have reached the max limit of clothes per wash"),
+                                      //                                     actions: [
+                                      //                                       CupertinoDialogAction(
+                                      //                                         child: const Text("Ok"),
+                                      //                                         onPressed: () {
+                                      //                                           Navigator.pop(context);
+                                      //                                         },
+                                      //                                       )
+                                      //                                     ],
+                                      //                                   );
+                                      //                                 });
+                                      //                           }
+                                      //                           setState(() {});
+                                      //                         },
+                                      //                         child: SizedBox(
+                                      //                           width: MediaQuery.of(
+                                      //                                   context)
+                                      //                               .size
+                                      //                               .width,
+                                      //                           child: Card(
+                                      //                               color: ref
+                                      //                                       .watch(
+                                      //                                           cartListProvider)
+                                      //                                       .contains(snapshot1.data.elementAt(index).data[
+                                      //                                           "cart_name"])
+                                      //                                   ? Theme.of(context)
+                                      //                                       .colorScheme
+                                      //                                       .primary
+                                      //                                   : Theme.of(context)
+                                      //                                       .colorScheme
+                                      //                                       .background,
+                                      //                               child:
+                                      //                                   Padding(
+                                      //                                 padding: const EdgeInsets
+                                      //                                         .all(
+                                      //                                     18.0),
+                                      //                                 child:
+                                      //                                     Text(
+                                      //                                   "${snapshot1.data.elementAt(index).data["cart_name"]}",
+                                      //                                 ),
+                                      //                               )),
+                                      //                         ),
+                                      //                       );
+                                      //                     }
+                                      //                   }),
+                                      //               const SizedBox(
+                                      //                 height: 10,
+                                      //               ),
+                                      //               SizedBox(
+                                      //                 height: 70,
+                                      //                 width:
+                                      //                     MediaQuery.of(context)
+                                      //                         .size
+                                      //                         .width,
+                                      //                 child: ElevatedButton(
+                                      //                   onPressed: () async {
+                                      //                     showLoaderDialog(
+                                      //                         context);
+                                      //                     await scheduleDatabase
+                                      //                         .syncClothList(
+                                      //                       ref.read(
+                                      //                           cartListProvider),
+                                      //                       snapshot.data
+                                      //                           .elementAt(
+                                      //                               index)
+                                      //                           .data['\$id'],
+                                      //                     );
+                                      //                     Navigator.pop(
+                                      //                         context);
+                                      //                   },
+                                      //                   child: const Text(
+                                      //                       "Sync Clothes List"),
+                                      //                 ),
+                                      //               )
+                                      //             ],
+                                      //           ),
+                                      //         );
+                                      //       } else {
+                                      //         return const CupertinoActivityIndicator();
+                                      //       }
+                                      //     })
                                     ],
                                   ),
                                 ),
@@ -537,180 +537,180 @@ class ScheduleDestination extends ConsumerWidget {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      FutureBuilder(
-                                          future: cartDatabase.getCartList(),
-                                          builder: (context,
-                                              AsyncSnapshot snapshot1) {
-                                            if (snapshot1.hasData) {
-                                              return Padding(
-                                                padding: const EdgeInsets.only(
-                                                  left: 18.0,
-                                                  right: 18.0,
-                                                  top: 10,
-                                                  bottom: 160,
-                                                ),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      "Add Clothes",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline6,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    ListView.builder(
-                                                        itemCount: snapshot1
-                                                            .data!.length,
-                                                        shrinkWrap: true,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          if (snapshot1
-                                                              .data.isEmpty) {
-                                                            return SizedBox(
-                                                              height: 200,
-                                                              width:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              child:
-                                                                  const Center(
-                                                                child: Icon(Icons
-                                                                    .cancel),
-                                                              ),
-                                                            );
-                                                          } else {
-                                                            return GestureDetector(
-                                                              onTap: () {
-                                                                if (ref.watch(cartListProvider).length <
-                                                                        max ||
-                                                                    ref.watch(cartListProvider).contains(snapshot1
-                                                                        .data
-                                                                        .elementAt(
-                                                                            index)
-                                                                        .data["cart_name"])) {
-                                                                  if (ref
-                                                                      .watch(
-                                                                          cartListProvider)
-                                                                      .contains(snapshot1
-                                                                          .data
-                                                                          .elementAt(
-                                                                              index)
-                                                                          .data["cart_name"])) {
-                                                                    ref
-                                                                        .read(cartListProvider
-                                                                            .state)
-                                                                        .state
-                                                                        .remove(snapshot1
-                                                                            .data
-                                                                            .elementAt(index)
-                                                                            .data["cart_name"]);
-                                                                  } else {
-                                                                    ref
-                                                                        .read(cartListProvider
-                                                                            .state)
-                                                                        .state
-                                                                        .add(snapshot1
-                                                                            .data
-                                                                            .elementAt(index)
-                                                                            .data["cart_name"]);
-                                                                  }
-                                                                } else {
-                                                                  showCupertinoDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (context) {
-                                                                        return CupertinoAlertDialog(
-                                                                          title:
-                                                                              const Text("Max Limit"),
-                                                                          content:
-                                                                              const Text("You have reached the max limit of clothes per wash"),
-                                                                          actions: [
-                                                                            CupertinoDialogAction(
-                                                                              child: const Text("Ok"),
-                                                                              onPressed: () {
-                                                                                Navigator.pop(context);
-                                                                              },
-                                                                            )
-                                                                          ],
-                                                                        );
-                                                                      });
-                                                                }
-                                                                setState(() {});
-                                                              },
-                                                              child: SizedBox(
-                                                                width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                                child: Card(
-                                                                    color: ref
-                                                                            .watch(
-                                                                                cartListProvider)
-                                                                            .contains(snapshot1.data.elementAt(index).data[
-                                                                                "cart_name"])
-                                                                        ? Theme.of(context)
-                                                                            .colorScheme
-                                                                            .primary
-                                                                        : Theme.of(context)
-                                                                            .colorScheme
-                                                                            .background,
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .all(
-                                                                          18.0),
-                                                                      child:
-                                                                          Text(
-                                                                        "${snapshot1.data.elementAt(index).data["cart_name"]}",
-                                                                      ),
-                                                                    )),
-                                                              ),
-                                                            );
-                                                          }
-                                                        }),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 70,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      child: ElevatedButton(
-                                                        onPressed: () async {
-                                                          showLoaderDialog(
-                                                              context);
-                                                          await scheduleDatabase
-                                                              .syncClothList(
-                                                            ref.read(
-                                                                cartListProvider),
-                                                            snapshot.data
-                                                                .elementAt(
-                                                                    index)
-                                                                .data['\$id'],
-                                                          );
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: const Text(
-                                                            "Sync Clothes List"),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              );
-                                            } else {
-                                              return const CupertinoActivityIndicator();
-                                            }
-                                          })
+                                    children: const <Widget>[
+                                      // FutureBuilder(
+                                      //     future: cartDatabase.getCartList(),
+                                      //     builder: (context,
+                                      //         AsyncSnapshot snapshot1) {
+                                      //       if (snapshot1.hasData) {
+                                      //         return Padding(
+                                      //           padding: const EdgeInsets.only(
+                                      //             left: 18.0,
+                                      //             right: 18.0,
+                                      //             top: 10,
+                                      //             bottom: 160,
+                                      //           ),
+                                      //           child: Column(
+                                      //             crossAxisAlignment:
+                                      //                 CrossAxisAlignment.start,
+                                      //             children: [
+                                      //               Text(
+                                      //                 "Add Clothes",
+                                      //                 style: Theme.of(context)
+                                      //                     .textTheme
+                                      //                     .headline6,
+                                      //               ),
+                                      //               const SizedBox(
+                                      //                 height: 10,
+                                      //               ),
+                                      //               ListView.builder(
+                                      //                   itemCount: snapshot1
+                                      //                       .data!.length,
+                                      //                   shrinkWrap: true,
+                                      //                   itemBuilder:
+                                      //                       (context, index) {
+                                      //                     if (snapshot1
+                                      //                         .data.isEmpty) {
+                                      //                       return SizedBox(
+                                      //                         height: 200,
+                                      //                         width:
+                                      //                             MediaQuery.of(
+                                      //                                     context)
+                                      //                                 .size
+                                      //                                 .width,
+                                      //                         child:
+                                      //                             const Center(
+                                      //                           child: Icon(Icons
+                                      //                               .cancel),
+                                      //                         ),
+                                      //                       );
+                                      //                     } else {
+                                      //                       return GestureDetector(
+                                      //                         onTap: () {
+                                      //                           if (ref.watch(cartListProvider).length <
+                                      //                                   max ||
+                                      //                               ref.watch(cartListProvider).contains(snapshot1
+                                      //                                   .data
+                                      //                                   .elementAt(
+                                      //                                       index)
+                                      //                                   .data["cart_name"])) {
+                                      //                             if (ref
+                                      //                                 .watch(
+                                      //                                     cartListProvider)
+                                      //                                 .contains(snapshot1
+                                      //                                     .data
+                                      //                                     .elementAt(
+                                      //                                         index)
+                                      //                                     .data["cart_name"])) {
+                                      //                               ref
+                                      //                                   .read(cartListProvider
+                                      //                                       .state)
+                                      //                                   .state
+                                      //                                   .remove(snapshot1
+                                      //                                       .data
+                                      //                                       .elementAt(index)
+                                      //                                       .data["cart_name"]);
+                                      //                             } else {
+                                      //                               ref
+                                      //                                   .read(cartListProvider
+                                      //                                       .state)
+                                      //                                   .state
+                                      //                                   .add(snapshot1
+                                      //                                       .data
+                                      //                                       .elementAt(index)
+                                      //                                       .data["cart_name"]);
+                                      //                             }
+                                      //                           } else {
+                                      //                             showCupertinoDialog(
+                                      //                                 context:
+                                      //                                     context,
+                                      //                                 builder:
+                                      //                                     (context) {
+                                      //                                   return CupertinoAlertDialog(
+                                      //                                     title:
+                                      //                                         const Text("Max Limit"),
+                                      //                                     content:
+                                      //                                         const Text("You have reached the max limit of clothes per wash"),
+                                      //                                     actions: [
+                                      //                                       CupertinoDialogAction(
+                                      //                                         child: const Text("Ok"),
+                                      //                                         onPressed: () {
+                                      //                                           Navigator.pop(context);
+                                      //                                         },
+                                      //                                       )
+                                      //                                     ],
+                                      //                                   );
+                                      //                                 });
+                                      //                           }
+                                      //                           setState(() {});
+                                      //                         },
+                                      //                         child: SizedBox(
+                                      //                           width: MediaQuery.of(
+                                      //                                   context)
+                                      //                               .size
+                                      //                               .width,
+                                      //                           child: Card(
+                                      //                               color: ref
+                                      //                                       .watch(
+                                      //                                           cartListProvider)
+                                      //                                       .contains(snapshot1.data.elementAt(index).data[
+                                      //                                           "cart_name"])
+                                      //                                   ? Theme.of(context)
+                                      //                                       .colorScheme
+                                      //                                       .primary
+                                      //                                   : Theme.of(context)
+                                      //                                       .colorScheme
+                                      //                                       .background,
+                                      //                               child:
+                                      //                                   Padding(
+                                      //                                 padding: const EdgeInsets
+                                      //                                         .all(
+                                      //                                     18.0),
+                                      //                                 child:
+                                      //                                     Text(
+                                      //                                   "${snapshot1.data.elementAt(index).data["cart_name"]}",
+                                      //                                 ),
+                                      //                               )),
+                                      //                         ),
+                                      //                       );
+                                      //                     }
+                                      //                   }),
+                                      //               const SizedBox(
+                                      //                 height: 10,
+                                      //               ),
+                                      //               SizedBox(
+                                      //                 height: 70,
+                                      //                 width:
+                                      //                     MediaQuery.of(context)
+                                      //                         .size
+                                      //                         .width,
+                                      //                 child: ElevatedButton(
+                                      //                   onPressed: () async {
+                                      //                     showLoaderDialog(
+                                      //                         context);
+                                      //                     await scheduleDatabase
+                                      //                         .syncClothList(
+                                      //                       ref.read(
+                                      //                           cartListProvider),
+                                      //                       snapshot.data
+                                      //                           .elementAt(
+                                      //                               index)
+                                      //                           .data['\$id'],
+                                      //                     );
+                                      //                     Navigator.pop(
+                                      //                         context);
+                                      //                   },
+                                      //                   child: const Text(
+                                      //                       "Sync Clothes List"),
+                                      //                 ),
+                                      //               )
+                                      //             ],
+                                      //           ),
+                                      //         );
+                                      //       } else {
+                                      //         return const CupertinoActivityIndicator();
+                                      //       }
+                                      //     })
                                     ],
                                   ),
                                 ),

@@ -23,44 +23,27 @@ class CartDatabase {
     }
   }
 
-  Future removeCart(String documentId) async {
+  Future addCart(String collectionID, String item) async {
     try {
-      await databases.deleteDocument(
-        documentId: documentId,
-        collectionId: cartCollectionId,
-        databaseId: laundryDatabaseId,
+      await databases.createDocument(
+        documentId: "unique()",
+        collectionId: collectionID,
+        databaseId: cartDatabaseId,
+        data: {
+          "item": item,
+        },
       );
     } catch (e) {
       log(e.toString());
     }
   }
 
-  Future createCart(
-    String cartName,
-    String userId,
-  ) async {
+  Future removeCart(String documentId, String collectionId) async {
     try {
-      await databases.createDocument(
-        documentId: "unique()",
-        permissions: [
-          Permission.update(
-            Role.user(userId),
-          ),
-          Permission.delete(
-            Role.user(userId),
-          ),
-          Permission.read(
-            Role.user(userId),
-          ),
-          Permission.write(
-            Role.user(userId),
-          ),
-        ],
-        collectionId: cartCollectionId,
-        databaseId: laundryDatabaseId,
-        data: {
-          "cart_name": cartName,
-        },
+      await databases.deleteDocument(
+        documentId: documentId,
+        collectionId: collectionId,
+        databaseId: cartDatabaseId,
       );
     } catch (e) {
       log(e.toString());
